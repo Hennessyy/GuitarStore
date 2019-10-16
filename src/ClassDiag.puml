@@ -1,0 +1,52 @@
+@startuml
+ skinparam classAttributeIconSize 0
+class Guitar {
+-serialNumber: String
+-price: double
++getSerialNumber(): String
++getPrice(): double
++setPrice(double)
++getSpec(): GuitarSpec
+}
+
+class GuitarSpec{
+-builder: Builder
+-model: String
+-type: Type
+-NumStrings: NumStrings
+-backWood: Wood
+-topWood:Wood
++getBuilder(): Builder
++getModel(): String
++getType(): Type
++getNumStrings(): NumStrings
++getBackWood(): Wood
++getTopWood(): Wood
++matches(GuitarSpec): Boolean
+}
+
+class Inventory {
+- guitars: List
++search(GuitarSpec): List
++addGuitar(Guitar)
++getGuitar():Guitar
+}
+
+Guitar --o Inventory: aggregation
+Guitar "0..*" -- GuitarSpec :has a
+
+enum Builder {
+FENDER
+GIBSON
+}
+enum Type {
+ELECTRIC
+ACOUSTIC
+}
+enum Wood {
+CEDAR
+ALDER
+MAHOGANY
+}
+
+@enduml
